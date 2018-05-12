@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper 
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+    
+<mapper namespace="autors">
+    
+    <resultMap id = "result" type = "stihi.model.Autors"> 
+        <result property = "id_Autors" column = "id_Autors"/> 
+        <result property = "name" column = "name"/> 
+        <collection property="stihi" javaType="List" ofType="stihi.model.Stihi" column="id_Autors"  select="selectStihi"/>
+    </resultMap> 
+
+    <select id="selectStihi" parameterType="int" resultMap="stihi.result">  
+        select * from stihi where id_Autors = #{id_Autors} ;
+    </select>
+
+    <select id = "selectAll" resultMap = "result"> 
+        SELECT * FROM autors;  
+    </select> 
+
+    <select id = "selectById" parameterType = "int" resultMap = "result"> 
+        SELECT * FROM autors WHERE id_Autors = #{id_Autors}; 
+    </select> 
+ 
+    <delete id = "deleteById" parameterType = "int"> 
+        DELETE from autors WHERE id_Autors = #{id_Autors}; 
+    </delete>
+
+    <insert id = "insert" parameterType = "stihi.model.Autors"> 
+        INSERT INTO autors (name) VALUES (#{name});     
+    </insert>
+
+    <update id = "update" parameterType = "stihi.model.Autors"> 
+        UPDATE autors SET 
+        name = #{name} 
+        WHERE id_Autors = #{id_Autors}; 
+    </update> 
+</mapper>
