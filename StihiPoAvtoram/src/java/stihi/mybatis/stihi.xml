@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper 
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+    
+<mapper namespace="stihi">
+    
+    <resultMap id = "result" type = "stihi.model.Stihi"> 
+        <result property = "id" column = "id"/> 
+        <result property = "title" column = "title"/>  
+        <result property = "fullDescription" column = "fullDescription"/> 
+        <result property = "date" column = "date"/> 
+        <result property = "id_Autors" column = "id_Autors"/> 
+    </resultMap> 
+
+    <select id = "selectAll" resultMap = "result"> 
+        SELECT * FROM stihi;  
+    </select> 
+
+    <select id = "selectById" parameterType = "int" resultMap = "result"> 
+        SELECT * FROM stihi WHERE id = #{id}; 
+    </select> 
+ 
+    <delete id = "deleteById" parameterType = "int"> 
+        DELETE from stihi WHERE id = #{id}; 
+    </delete>
+
+    <insert id = "insert" parameterType = "stihi.model.Stihi"> 
+        INSERT INTO stihi (title, fullDescription, date, id_Autors)   
+        VALUES (#{title}, #{fullDescription}, #{date}, #{id_Autors});     
+    </insert>
+
+    <update id = "update" parameterType = "stihi.model.Stihi"> 
+        UPDATE stihi SET 
+        title = #{title}, 
+        fullDescription = #{fullDescription}, 
+        date= #{date},
+        id_Autors= #{id_Autors}
+        WHERE id = #{id}; 
+    </update> 
+</mapper>
