@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Стихи</title>
+        
+        <!-- css-->
+        <link href="lib/css/bootstrap.min.css" rel="stylesheet">
+        <link href="lib/css/style.css" rel="stylesheet">
+
+        <!-- библиотеки-->
+        <script src="lib/js/jquery.min.js"></script>
+        <script src="lib/js/bootstrap.min.js"></script>
+        
+        <!-- service -->
+        <script src="service/AutorsService.js"></script>
+        <script src="service/StihiService.js"></script>
+        <!-- controllers -->
+        <script src="controllers/AutorsController.js"></script>
+        <script src="controllers/StihiController.js"></script>
+
+        <!-- создает события autorClick и stihiClick, которые потом загружаются из контроллера html текст-->
+        <script>
+            var stih = "";
+            function autorClick(id)
+            {
+                var controller = new StihiController();
+                controller.getStihiByAutorIdViewList(id);
+            }
+            function stihiClick(id)
+            {
+                
+                //переход с передачей параметров на get;
+                document.location.replace("/Stihi/view/stihi.html?id="+id);
+            }
+        </script>
+
+
+    </head>
+    <body class="container">
+
+
+        <div id="header" class="container">
+            <!-- Fixed navbar -->
+            <div class="navbar navbar-default navbar-static-top" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">                        
+                        <a class="navbar-brand" href="">Стихотворения</a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="">Главная</a></li>
+                            <li><a href="#about">О сервисе</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="body" class="container">
+            <div class="row">
+                <div id="autors" class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                    <!--место для загрузки авторов-->
+                </div>
+                <div id="stihi" class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                    <!--место для загрузки стихотворений-->
+                </div>
+                <div id="footer" class="container">                           
+                    <center> <p>Сервис создан в учебных целях студентками группы САУ-141 Алиной Павлюк и Ксенией Большаковой</p>  </center>
+                </div>
+            </div>
+        </div> 
+
+
+        <!--скрипт активируется при загрузке страницы-->
+        <script>
+            $(window).load(function () {
+
+                var controller = new AutorsController();  // создание объекта AutorsController
+                controller.getAllAutorsViewButtons(); //вызов его функции getAllAutorsViewButtons()
+
+
+                var controllerStihi = new StihiController(); // создание объекта StihiController()
+                controllerStihi.getStihiByAutorIdViewList(1); // вызов стихотворений 1 автора в <div id="stihi" class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+            });
+        </script>
+    </body>
+</html>
