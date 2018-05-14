@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+        <title>Сервис</title>
+
+        <link href="../lib/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../lib/css/style.css" rel="stylesheet">
+
+        <!-- service -->
+        <script src="../service/AutorsService.js"></script>
+        <script src="../service/StihiService.js"></script>
+        <!-- controllers -->
+        <script src="../controllers/AutorsController.js"></script>
+        <script src="../controllers/StihiController.js"></script>
+
+    </head>
+    <body class="container">
+
+
+        <div id="header" class="container">
+            <!-- Fixed navbar -->
+            <div class="navbar navbar-default navbar-static-top" role="navigation">
+                <div class="container">                    
+                    <a class="navbar-brand" href="http://localhost:8084/Stihi/">Стихи</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li ><a href="http://localhost:8084/Stihi/">Главная</a></li>
+                        <li class="active"><a href="C:\Users\Sulpak\Desktop\ДОКУМЕНТЫ\STIHI\Stihi\web\view">О сервисе</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="body" class="container">
+            <div class="row">
+                <div id="oneStih" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    
+                       
+                       <!-- место для стихотворения-->
+                        
+                    
+                </div>
+            </div>
+        </div> 
+
+
+        <!-- библиотеки -->
+        <script src="../lib/js/jquery.min.js"></script>
+        <script src="../lib/js/bootstrap.min.js"></script>
+        <script>
+            //функция получает гет параметры из строки браузера
+            function getUrlVars() {
+                var vars = {};
+                var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+                    vars[key] = value;
+                });
+                return vars;
+            }
+            var idStiha = getUrlVars()["id"];// получаем параметр id стихотворения из адресной строки
+
+            // Используем функцию при загрузке страницы, которая вставляет стихотворение по его id в элемент этой html страницы, где у самого элемента id="oneStih"
+            $(window).load(function () {
+                var controllerStihi = new StihiController(); // создание объекта StihiController()
+                controllerStihi.getStihByIdViewList(idStiha); // вызов 1 стихотворения в элемент с id = "oneStih"
+
+            });
+        </script>
+    </body>
+</html>
